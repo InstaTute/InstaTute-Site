@@ -1,0 +1,17 @@
+development:
+  stripe_api_key: sk_test_WbMNJRM9eTGC4ZEQT2KiExJQ
+  stripe_publishable_key: pk_test_JoMuoRcfBTVppYAKhgVaYwgC
+  mailgun_username: postmaster@mailer.instatute.org
+  mailgun_password: 451ac923aeb94074a65e381d1727bfc2
+  devise_secret_key: 52cee9318dcc1a8201444098a988c5606d8dd6a88891a841c57422f685b9005640924043e231a74b69ec328a691db3abe65344292ca44265d4b6b68a6f795f56
+
+# production:
+#   stripe_api_key: sk_live_ZNGbZyIiMiruMPvhZbviN33B
+#   stripe_publishable_key: pk_live_ljGx8RgDPl6ZyIV8LsdAQOtT
+
+production:
+  stripe_api_key: sk_live_ZNGbZyIiMiruMPvhZbviN33B
+  stripe_publishable_key: pk_live_ljGx8RgDPl6ZyIV8LsdAQOtT
+  mailgun_username: postmaster@mailer.instatute.org
+  mailgun_password: 451ac923aeb94074a65e381d1727bfc2
+  devise_secret_key: 52cee9318dcc1a8201444098a988c5606d8dd6a88891a841c57422f685b9005640924043e231a74b69ec328a691db3abe65344292ca44265d4b6b68a6f795f56

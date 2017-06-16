@@ -1,0 +1,4 @@
+.notification
+  %h5 You have been added to an instant chatroom.
+  - @chatroom = Chatroom.find(notification.chatroom_id)
+  = link_to "Go To Chat", @chatroom, class: "btn btn-primary"

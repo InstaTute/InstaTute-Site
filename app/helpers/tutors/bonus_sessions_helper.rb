@@ -1,0 +1,2 @@
+module Tutors::BonusSessionsHelper
+end

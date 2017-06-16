@@ -1,0 +1,19 @@
+.text-xs-center
+  %h1.display-4 Welcome
+  %p.lead Begin learning or teaching today!
+  .col-xl-6
+    .card
+      .card-block
+        %h1.card-title Students
+        .container-fluid
+          .col-xl-6
+            = link_to 'Sign Up', '/users/sign_up', :class => "btn btn-success welcome btn-block", :role => "button"
+          .col-xl-6
+            = link_to 'Login', '/users/sign_in', :class => "btn btn-info welcome btn-block", :role => "button"
+  .col-xl-6
+    .card
+      .card-block
+        %h1.card-title Tutors
+        .container-fluid
+          .col-xl-12
+            = link_to 'Login', '/tutors/sign_in', :class => "btn btn-info welcome btn-block", :role => "button"

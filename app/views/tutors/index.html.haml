@@ -1,0 +1,12 @@
+.text-xs-center
+  - if @tutor.setup
+    %h3.display-4 Welcome!
+    %br
+    .row
+      .col-md-6
+        = link_to "Manage My Timeslots", "tutors/timeslots/show", class: "btn btn-primary w-100"
+      .col-md-6
+        = link_to "I'm Now Available For An Instant Chat Session", "tutors/notifications/index", class: "w-100 btn btn-secondary"
+  - else
+    %h3.display-4 Please Add Your Account Information
+    = link_to "Get Started", {controller: "tutors", action: "account"}, class: "w-100 btn btn-primary"

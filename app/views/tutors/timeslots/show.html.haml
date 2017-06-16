@@ -1,0 +1,24 @@
+= render 'tutors/tutor_navbar'
+.container-fluid.text-sm-center.text-md-left
+  .jumbotron.jumbotron-fluid
+    .container
+      - flash.each do |key, value|
+        %div{:class => "alert alert-#{key}"}= value
+      %h4.display-4 Your Current Timeslots
+
+      = link_to 'New Timeslot',  { action: :new }, method: :get, :class => "btn btn-primary"
+
+      - @timeslots.find_each do |t|
+        .row
+          .col-sm-4
+            %p.form-text.text-muted
+              Start
+            %p= t.slot_start.to_formatted_s(:long)
+          .col-sm-4
+            %p.form-text.text-muted
+              End
+            %p= t.slot_finish.to_formatted_s(:long)
+          .col-sm-4
+          %p.form-text.text-muted
+            Actions
+          = link_to 'Destroy',  { action: :destroy, id: t.id }, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-primary"

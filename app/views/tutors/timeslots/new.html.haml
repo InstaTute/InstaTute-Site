@@ -1,0 +1,93 @@
+= render 'tutors/tutor_navbar'
+.container-fluid.text-sm-center.text-md-left
+  .jumbotron.jumbotron-fluid
+    .container
+      - flash.each do |key, value|
+        %div{:class => "alert alert-danger"}= value
+      = form_tag(controller: "tutors/timeslots", action: "create", method: "post") do
+        .row
+          %p.form-text.text-muted
+            Choose start and end dates and times(EST).
+        .form-group.row
+          .col-md-4
+            %p.form-text.text-muted
+              Start date:
+            %input#example-date-input.form-control{:type => "date", :required => true, :name => "sdate", :min => @min}
+          .col-md-4
+            %p.form-text.text-muted
+              Start hour:
+            %select.selectpicker{:name => "shour", :type => "text", :required => true, :data => {:style => 'btn-secondary', :size => 'false', :mobile => 'true'}}
+              %option{:value => "00"} 00
+              %option{:value => "01"} 01
+              %option{:value => "02"} 02
+              %option{:value => "03"} 03
+              %option{:value => "04"} 04
+              %option{:value => "05"} 05
+              %option{:value => "06"} 06
+              %option{:value => "07"} 07
+              %option{:value => "08"} 08
+              %option{:value => "09"} 09
+              %option{:value => "10"} 10
+              %option{:value => "11"} 11
+              %option{:value => "12"} 12
+              %option{:value => "13"} 13
+              %option{:value => "14"} 14
+              %option{:value => "15"} 15
+              %option{:value => "16"} 16
+              %option{:value => "17"} 17
+              %option{:value => "18"} 18
+              %option{:value => "19"} 19
+              %option{:value => "20"} 20
+              %option{:value => "21"} 21
+              %option{:value => "22"} 22
+              %option{:value => "23"} 23
+          .col-md-4
+            %p.form-text.text-muted
+              Start minute:
+            %select.selectpicker{:name => "smin", :type => "text", :required => true, :data => {:style => 'btn-secondary', :size => 'false', :mobile => 'true'}}
+              %option{:value => "00"} 00
+              %option{:value => "15"} 15
+              %option{:value => "30"} 30
+              %option{:value => "45"} 45
+        .form-group.row
+          .col-md-4
+            %p.form-text.text-muted
+              End day:
+            %input#example-date-input.form-control{:type => "date", :required => true, :name => "fdate", :min => @min}
+          .col-md-4
+            %p.form-text.text-muted
+              End hour:
+            %select.selectpicker{:name => "fhour", :type => "text", :required => true, :data => {:style => 'btn-secondary', :size => 'false', :mobile => 'true'}}
+              %option{:value => "00"} 00
+              %option{:value => "01"} 01
+              %option{:value => "02"} 02
+              %option{:value => "03"} 03
+              %option{:value => "04"} 04
+              %option{:value => "05"} 05
+              %option{:value => "06"} 06
+              %option{:value => "07"} 07
+              %option{:value => "08"} 08
+              %option{:value => "09"} 09
+              %option{:value => "10"} 10
+              %option{:value => "11"} 11
+              %option{:value => "12"} 12
+              %option{:value => "13"} 13
+              %option{:value => "14"} 14
+              %option{:value => "15"} 15
+              %option{:value => "16"} 16
+              %option{:value => "17"} 17
+              %option{:value => "18"} 18
+              %option{:value => "19"} 19
+              %option{:value => "20"} 20
+              %option{:value => "21"} 21
+              %option{:value => "22"} 22
+              %option{:value => "23"} 23
+          .col-md-4
+            %p.form-text.text-muted
+              End minute:
+            %select.selectpicker{:name => "fmin", :type => "text", :required => true, :data => {:style => 'btn-secondary', :size => 'false', :mobile => 'true'}}
+              %option{:value => "00"} 00
+              %option{:value => "15"} 15
+              %option{:value => "30"} 30
+              %option{:value => "45"} 45
+          = submit_tag "Add Timeslot", :class => "btn btn-primary"

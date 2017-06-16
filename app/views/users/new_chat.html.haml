@@ -1,0 +1,18 @@
+= form_tag(controller: "chatrooms", action: "create", method: "post") do
+  .row
+    %h4.display-4 Schedule A Session
+  .row
+    %p.form-text.text-muted
+      Choose a course:
+  .form-group.row
+    %select.selectpicker{:name => "course_name", :data => {:style => 'btn-secondary', :mobile => 'true'}, :required => true}
+      = @subjects.each do |s|
+        %optgroup{:label => s.name}
+          = s.courses.find_each do |c|
+            %option{:value => c.name}= c.name
+  .form-group.row
+    %p.form-text.text-muted
+      Please enter a short description of what you'd like to discuss/ask during your session:
+    %label{:for => "textarea"} Topic
+    %textarea#textarea.form-control{:name => :topic, :rows => "3", :required => true}
+  = submit_tag "Submit", :class => "btn btn-primary"

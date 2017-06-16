@@ -1,0 +1,28 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+input.inline {
+  display: inline-block;
+  width: 45%;
+}
+span.inline{
+  z-index: 30;
+}
+div.inline-block {
+  float: left;
+}
+select {
+  height: 20px;
+}
+p.form-text.text-muted{
+  margin-top: 8px;
+}
+[type="submit"] {
+  margin-top: 10px;
+}
+.form-group {
+  padding-top: 10px;
+}
+.container {
+  padding: 50px;
+}

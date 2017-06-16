@@ -1,0 +1,21 @@
+%h5 Please rate your experience during your last session:
+= form_tag(controller: "tutors", action: "rate", method: "post", id: "rate_form") do
+  %select#example{name: 'rate'}
+    %option{:value => "1"} 1
+    %option{:value => "2"} 2
+    %option{:value => "3"} 3
+    %option{:value => "4"} 4
+    %option{:value => "5"} 5
+    %option{:value => "6"} 6
+    %option{:value => "7"} 7
+    %option{:value => "8"} 8
+    %option{:value => "9"} 9
+    %option{:value => "10"} 10
+  = hidden_field_tag 'tutor', @user.last_tutor_id
+  %p.form-text.text-muted
+    Please leave us a review of your session. Was the tutor helpful? Did they seem knowledgable about the subject? Do you have any concerns about the tutor? Please let us know. We love all feedback.
+  = text_area_tag 'review', nil, rows: 4, class: 'form-control'
+  = submit_tag "Submit", data: { confirm: "Are you sure?" }, class: "btn btn-primary"
+  %p.form-text.text-muted
+    If you have any suggestions on ways we can improve our services feel free to
+  %a.btn.btn-secondary{ :href => "mailto:team@instatute"} Shoot Us An Email

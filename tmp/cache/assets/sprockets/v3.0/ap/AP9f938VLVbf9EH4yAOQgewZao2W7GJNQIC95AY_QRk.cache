@@ -1,0 +1,16 @@
+I"U(function() {
+  $(document).on("turbolinks:load", function() {
+    return $("#new_message").on("keypress", function(e) {
+      if (e && e.keyCode === 13) {
+        e.preventDefault();
+        return $(this).submit();
+      }
+    });
+  });
+
+  $('#session_end').click(function() {
+    return App.chatrooms.unsubscribe();
+  });
+
+}).call(this);
+:ET

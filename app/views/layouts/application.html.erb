@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>InstaTute</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+  </head>
+  <body>
+    <% if user_signed_in? %>
+      <%= render 'users/user_navbar' %>
+    <% elsif tutor_signed_in? %>
+      <%= render 'tutors/tutor_navbar' %>
+    <% elsif admin_signed_in? %>
+      <%= render 'admins/admin_navbar' %>
+    <% end %>
+    <div class="container-fluid text-sm-center text-md-left">
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <% flash.each do |key, value| %>
+            <div class="alert alert-danger">
+              <a href="#" data-dismiss="alert" class="close">×</a>
+              <ul>
+                <li>
+                  <%= value %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.4/js/tether.min.js"></script>
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag "https://js.stripe.com/v2" %>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet"></link>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+    <script>
+
+        jQuery(function($) {
+          $('#payment-form').submit(function(e) {
+            var $form;
+            $form = $(this);
+            $form.find('button').prop('disabled', true);
+            Stripe.card.createToken({
+              number: $('.card-number').val(),
+              cvc: $('.card-cvc').val(),
+              exp_month: $('.card-expiry-month').val(),
+              exp_year: $('.card-expiry-year').val(),
+              address_zip: $('.address_zip').val()
+            }, stripeResponseHandler1);
+            return false;
+          });
+        });
+
+        jQuery(function($) {
+          $('#tutor-form').submit(function(e) {
+            var $form;
+            $form = $(this);
+            $form.find('button').prop('disabled', true);
+            Stripe.bankAccount.createToken({
+              country: "US",
+              currency: "USD",
+              routing_number: $('.routing-number').val(),
+              account_number: $('.account-number').val(),
+              account_holder_name: $('.name').val(),
+              account_holder_type: "individual"
+            }, stripeResponseHandler2);
+            return false;
+          });
+        });
+
+        var stripeResponseHandler;
+        Stripe.setPublishableKey('pk_test_JoMuoRcfBTVppYAKhgVaYwgC');
+        stripeResponseHandler1 = function(status, response) {
+          var $form, token;
+          $form = $('#payment-form');
+          if (response.error) {
+            $form.find('.payment-errors').text(response.error.message);
+            $form.find('button').prop('disabled', false);
+          } else {
+            token = response.id;
+            $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+            $form.get(0).submit();
+          }
+        };
+        stripeResponseHandler2 = function(status, response) {
+          var $form, token;
+          $form = $('#tutor-form');
+          if (response.error) {
+            $form.find('.payment-errors').text(response.error.message);
+            $form.find('button').prop('disabled', false);
+          } else {
+            token = response.id;
+            $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+            $form.get(0).submit();
+          }
+        };
+
+
+    </script>
+  </body>
+</html>

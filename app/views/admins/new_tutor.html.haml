@@ -1,0 +1,10 @@
+%h3 Add a tutor:
+= form_tag(controller: "admins", action: "add_tutor", method: "post") do
+  .form-group.row
+    .col-xs-6
+      %label :email
+      = email_field :email, class: "form-control", placeholder: "example@colgate.edu", autofocus: true
+      %label :password
+      = password_field_tag(:pass), class: "form-control", placeholder: "********"
+    .col-xs-6
+      = submit_tag("Add Tutor")

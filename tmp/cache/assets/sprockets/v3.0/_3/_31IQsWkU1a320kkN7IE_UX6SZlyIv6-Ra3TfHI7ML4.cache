@@ -1,0 +1,16 @@
+I"(function() {
+  App.chatrooms = App.cable.subscriptions.create("ChatroomsChannel", {
+    connected: function() {},
+    disconnected: function() {},
+    received: function(data) {
+      if (data.message === ("<div>\n  <p>\n    <em>" + data.first_name + ": </em>/finish\n  </p>\n</div>\n")) {
+        App.chatrooms.unsubscribe();
+        return delete App.chatrooms;
+      } else {
+        return $("[data-behavior='messages'][data-chatroom-id='" + data.chatroom_id + "']").append(data.message);
+      }
+    }
+  });
+
+}).call(this);
+:ET

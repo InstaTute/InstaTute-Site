@@ -1,0 +1,104 @@
+= form_tag({controller: "tutors", action: "payment", method: "put"}, html: { role: "form", id: "payment-form"}) do
+  .row
+    %h4.display-4 Add Your Information To Your Account
+    %p.form-text.text-muted This is a necessary step. Please be very careful to enter accurate information.
+  .form-group.row
+    .col-md-6
+      %p.form-text.text-muted
+        First name:
+      = text_field_tag :first_name, "", :class => "form-control", :required => true, :placeholder => "Jane"
+    .col-md-6
+      %p.form-text.text-muted
+        Last name:
+      = text_field_tag :last_name, "", :class => "form-control", :required => true, :placeholder => "Doe"
+  .form-group.row
+    .col-xs-12
+      %p.form-text.text-muted
+        Please enter your email:
+      = email_field_tag :email, "", :class => "form-control", :required => true, :placeholder => "sample@colgate.edu"
+  .form-group.row
+    %p.form-text.text-muted
+      Please enter your address:
+    .col-md-3
+      = label_tag :line1, "Address:"
+      = text_field_tag :line1, "", :class => "form-control", :required => true, :placeholder => "1 Sample Lane"
+    .col-md-3
+      = label_tag :city, "City:"
+      = text_field_tag :city, "", :class => "form-control", :required => true, :placeholder => "Example City"
+    .col-md-3
+      = label_tag :state, "State:"
+      = text_field_tag :state, "", :class => "form-control", :required => true, :placeholder => "Some State"
+    .col-md-3
+      = label_tag :zip, "Zip:"
+      = text_field_tag :zip, "", :class => "form-control", :required => true, :placeholder => "*****"
+  .form-group.row
+    %p.form-text.text-muted
+      Please enter your birthdate:
+    .col-md-3
+      %select.selectpicker{:name => "bmonth", :required => true, :data => {:style => 'btn-secondary', :size => 'false', :mobile => 'true'}}
+        %option{:value => ""} Month
+        %option{:value => "01"} 01
+        %option{:value => "02"} 02
+        %option{:value => "03"} 03
+        %option{:value => "04"} 04
+        %option{:value => "05"} 05
+        %option{:value => "06"} 06
+        %option{:value => "07"} 07
+        %option{:value => "08"} 08
+        %option{:value => "09"} 09
+        %option{:value => "10"} 10
+        %option{:value => "11"} 11
+        %option{:value => "12"} 12
+    .col-md-3
+      %select.selectpicker{:name => "bday", :required => true, :data => {:style => 'btn-secondary', :size => 'false', :mobile => 'true'}}
+        %option{:value => ""} Day
+        %option{:value => "01"} 01
+        %option{:value => "02"} 02
+        %option{:value => "03"} 03
+        %option{:value => "04"} 04
+        %option{:value => "05"} 05
+        %option{:value => "06"} 06
+        %option{:value => "07"} 07
+        %option{:value => "08"} 08
+        %option{:value => "09"} 09
+        %option{:value => "10"} 10
+        %option{:value => "11"} 11
+        %option{:value => "12"} 12
+        %option{:value => "13"} 13
+        %option{:value => "14"} 14
+        %option{:value => "15"} 15
+        %option{:value => "16"} 16
+        %option{:value => "17"} 17
+        %option{:value => "18"} 18
+        %option{:value => "19"} 19
+        %option{:value => "20"} 20
+        %option{:value => "21"} 21
+        %option{:value => "22"} 22
+        %option{:value => "23"} 23
+        %option{:value => "24"} 24
+        %option{:value => "25"} 25
+        %option{:value => "26"} 26
+        %option{:value => "27"} 27
+        %option{:value => "28"} 28
+        %option{:value => "29"} 29
+        %option{:value => "30"} 30
+        %option{:value => "31"} 31
+    .col-md-6
+      = text_field_tag :byear, "", :class => "form-control", :maxlength => 4, :required => true, :placeholder => "Year"
+  .form-group.row
+    %p.form-text.text-muted
+      Please enter the last four digits of your social security number (used in Stripe identity verification):
+      = password_field_tag :ssn_last_4, "", :class => "name form-control", :required => true, :maxlength => "4", :placeholder => "****"
+  .form-group.row
+    %p.form-text.text-muted
+      Please enter your banking information (This is passed directly to Stripe. We do not store it.):
+    .col-md-4
+      = label_tag :account_holder_name, "Name of the account holder:"
+      = text_field_tag :account_holder_name, "", :class => "name form-control", :required => true, :placeholder => "Account Holder"
+    .col-md-4
+      = label_tag :routing_number, "Routing number:"
+      = text_field_tag :routing_number, "", :class => "routing-number form-control", :required => true, :placeholder => "*********"
+    .col-md-4
+      = label_tag :account_number, "Account number:"
+      = text_field_tag :account_number, "", :class => "account-number form-control", :required => true, :placeholder => "************"
+  = submit_tag "Submit", :class => "btn btn-primary"

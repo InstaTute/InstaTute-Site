@@ -1,0 +1,15 @@
+.chatroom_header.text_xs_center
+  %h4= "Course: " << @coursename
+  %h5= "Topic: " << @chatroom.topic
+  %h6= "Tutor: " << @tutor.first_name
+  %h6= "User: " << @user.first_name
+.chat-body{"data-behavior" => "messages", "data-chatroom-id" => @chatroom.id}
+  - @messages.each do |message|
+    = render message
+
+= form_for [:chatroom, Message.new], :remote => true do |f|
+  = f.text_field :content, class: "form-control", id: "new_message", autofocus: true
+
+= form_tag({controller: :chatrooms, action: :finished}, :method => :post, :id => 'finish', :onsubmit => 'endChat()') do
+  = hidden_field_tag 'finished', true
+  = submit_tag 'End Chat', class: 'btn btn-danger data-no-turbolink', data: { confirm: 'Are you sure?' }

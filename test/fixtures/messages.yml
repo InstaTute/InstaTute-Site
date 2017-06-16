@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  chatroom: one
+  messageable: one
+  messageable_type: Messageable
+  content: MyText
+
+two:
+  chatroom: two
+  messageable: two
+  messageable_type: Messageable
+  content: MyText

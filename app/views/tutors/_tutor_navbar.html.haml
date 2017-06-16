@@ -1,0 +1,9 @@
+%nav.navbar.navbar-light.bg-faded.navbar-fixed-top
+  %a.navbar-brand
+    = link_to "InstaTute", root_path
+  - if tutor_signed_in?
+    = link_to('Logout', destroy_tutor_session_path, :method => :delete, :class => "btn btn-secondary btn-sm pull-xs-right")
+  - else
+    = link_to('Login', new_tutor_session_path, :class => "btn btn-secondary btn-sm pull-xs-right")
+  - if tutor_signed_in?
+    = link_to('Edit registration', edit_tutor_registration_path, :class => "btn btn-secondary btn-sm pull-xs-right")

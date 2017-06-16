@@ -1,0 +1,108 @@
+= form_tag(controller: "users", action: "request_session", method: "post") do
+  .row
+    %h4.display-4 Schedule A Session
+  .row
+    %p.form-text.text-muted
+      Choose a type of tutor:
+  .form-group.row
+    .radio.inline-block.col-md-6.text-md-right
+      %label
+        %input#optionsRadios1{:name => "service", :type => "radio", :required => true, :value => "0"}
+          %button.btn.btn-secondary{:type => "button"}
+            .card-block
+              %h5.card-title Standard
+              %p.card-text
+                Instatute Verified Tutor
+              %p.card-text
+                $20/hour
+    .radio.inline-block.col-md-6.text-md-left
+      %label
+        %input#optionsRadios1{:name => "service", :type => "radio", :value => "1"}
+          %button.btn.btn-secondary{:type => "button"}
+            .card-block
+              %h5.card-title Premium
+              %p.card-text
+                Top Rated Instatute Tutor
+              %p.card-text
+                $25/hour
+  .row
+    %p.form-text.text-muted
+      Choose a course:
+  .form-group.row
+    %select.selectpicker{:name => "course_name", :data => {:style => 'btn-secondary', :required => true, :size => 'false', :live_search => 'true', :mobile => 'true'}}
+      - @subjects.each do |s|
+        %optgroup{:label => s.name}
+          - s.courses.each do |c|
+            %option{:value => c.name}= c.name
+  .row
+    %p.form-text.text-muted
+      Choose a date and time(EST). All in-person scheduled must be scheduled at least two days in advance.
+  .form-group.row
+    .col-md-4
+      %p.form-text.text-muted
+        Start day:
+      %input#example-datetime-local-input.form-control{:type => "date", :required => true, :name => "date", :min => @min, :max => @max, :data => {:provide => 'datepicker'}}
+    .col-md-4
+      %p.form-text.text-muted
+        Start hour:
+      %select.selectpicker{:name => "hour", :required => true, :data => {:style => 'btn-secondary', :size => 'false', :mobile => 'true'}}
+        %option{:value => ""} hh
+        %option{:value => "00"} 00
+        %option{:value => "01"} 01
+        %option{:value => "02"} 02
+        %option{:value => "03"} 03
+        %option{:value => "04"} 04
+        %option{:value => "05"} 05
+        %option{:value => "06"} 06
+        %option{:value => "07"} 07
+        %option{:value => "08"} 08
+        %option{:value => "09"} 09
+        %option{:value => "10"} 10
+        %option{:value => "11"} 11
+        %option{:value => "12"} 12
+        %option{:value => "13"} 13
+        %option{:value => "14"} 14
+        %option{:value => "15"} 15
+        %option{:value => "16"} 16
+        %option{:value => "17"} 17
+        %option{:value => "18"} 18
+        %option{:value => "19"} 19
+        %option{:value => "20"} 20
+        %option{:value => "21"} 21
+        %option{:value => "22"} 22
+        %option{:value => "23"} 23
+    .col-md-4
+      %p.form-text.text-muted
+        Start minute:
+      %select.selectpicker{:name => "min", :required => true, :data => {:style => 'btn-secondary', :size => 'false', :mobile => 'true'}}
+        %option{:value => ""} mm
+        %option{:value => "00"} 00
+        %option{:value => "15"} 15
+        %option{:value => "30"} 30
+        %option{:value => "45"} 45
+  .form-group.row
+    .col-md-6
+      %p.form-text.text-muted
+        Length of session (minutes)?:
+      %select.selectpicker{:name => "length", :required => true, :data => {:style => 'btn-secondary', :size => 'false', :mobile => 'true'}}
+        %option{:value => ""} mm
+        %option{:value => "30"} 30
+        %option{:value => "45"} 45
+        %option{:value => "60"} 60
+        %option{:value => "75"} 75
+        %option{:value => "90"} 90
+        %option{:value => "120"} 120
+    .col-md-6
+      %p.form-text.text-muted
+        Where?:
+      %select.selectpicker{:name => "location", :required => true, :data => {:style => 'btn-secondary', :size => 'false', :mobile => 'true'}}
+        %option{:value => ""} Place
+        %option{:value => "Case-Geyer Library"} Case-Geyer Library
+        %option{:value => "Ho Science Center"} Ho Science Center
+        %option{:value => "Lawrence Hall"} Lawrence Hall
+  .form-group.row
+    %p.form-text.text-muted
+      Please enter a short description of what you'd like to discuss/ask during your session:
+    %label{:for => "textarea"} Topic
+    %textarea#textarea.form-control{:name => "topic", :rows => "3", :required => true}
+  = submit_tag "Submit", :class => "btn btn-primary"

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  tutor: one
+  course: one
+  topic: MyText
+  start: 2016-08-11 17:54:40
+  finish: 2016-08-11 17:54:40
+
+two:
+  user: two
+  tutor: two
+  course: two
+  topic: MyText
+  start: 2016-08-11 17:54:40
+  finish: 2016-08-11 17:54:40

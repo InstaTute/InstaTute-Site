@@ -1,0 +1,9 @@
+.notification-header.text-xs-center
+  %h4 Chat requests:
+.notify-body{"data-behavior" => "notifications", "data-notification-id" => current_tutor.id}
+  = render @notifications
+
+:javascript
+  setTimeout((function() {
+    window.location.reload(1);
+  }), 40000);

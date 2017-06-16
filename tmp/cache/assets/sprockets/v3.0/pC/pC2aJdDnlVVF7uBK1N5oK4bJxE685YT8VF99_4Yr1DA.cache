@@ -1,0 +1,16 @@
+I"„(function() {
+  App.chatroom = App.cable.subscriptions.create("ChatroomChannel", {
+    connected: function() {},
+    disconnected: function() {},
+    received: function(data) {},
+    speak: function(message, chat_room_id) {
+      console.log(message);
+      return this.perform('speak', {
+        message: message,
+        chat_room_id: chat_room_id
+      });
+    }
+  });
+
+}).call(this);
+:ET

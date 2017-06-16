@@ -1,0 +1,11 @@
+I"÷(function() {
+  $(document).on('keypress', '#new_message', function(event) {
+    if (event.keyCode === 13) {
+      App.chat.speak(event.target.value);
+      event.target.value = "";
+      return event.preventDefault();
+    }
+  });
+
+}).call(this);
+:ET

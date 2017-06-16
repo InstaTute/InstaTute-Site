@@ -1,0 +1,14 @@
+development:
+  adapter: redis
+  url: redis://h:pdh009sciakn3nfcvtd2ijnu5e6@ec2-54-163-236-211.compute-1.amazonaws.com:14229
+  password: pdh009sciakn3nfcvtd2ijnu5e6
+
+test:
+  adapter: redis
+  url: redis://h:pdh009sciakn3nfcvtd2ijnu5e6@ec2-54-163-236-211.compute-1.amazonaws.com:14229
+  password: pdh009sciakn3nfcvtd2ijnu5e6
+
+production:
+  adapter: redis
+  url: redis://h:pdh009sciakn3nfcvtd2ijnu5e6@ec2-54-163-236-211.compute-1.amazonaws.com:14229
+  password: pdh009sciakn3nfcvtd2ijnu5e6
