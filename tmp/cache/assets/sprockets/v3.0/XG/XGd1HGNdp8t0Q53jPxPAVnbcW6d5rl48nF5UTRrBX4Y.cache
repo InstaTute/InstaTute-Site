@@ -1,0 +1,44 @@
+{:uriI"‰file://app/assets/stylesheets/bootstrap-stars.css.txt?type=text/plain&id=de1441570a5e99f9fd399d8e0f6a30ab85da61452b139b506718240d6f3c769e:ET:load_pathI"app/assets/stylesheets;T:filenameI"3app/assets/stylesheets/bootstrap-stars.css.txt;T:	nameI"bootstrap-stars.css;T:logical_pathI"bootstrap-stars.css.txt;T:content_typeI"text/plain;T:sourceI"µ.br-theme-bootstrap-stars .br-widget {
+  height: 28px;
+  white-space: nowrap;
+}
+.br-theme-bootstrap-stars .br-widget a {
+  font: normal normal normal 18px/1 'Glyphicons Halflings';
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  text-decoration: none;
+  margin-right: 2px;
+}
+.br-theme-bootstrap-stars .br-widget a:after {
+  content: '\e006';
+  color: #d2d2d2;
+}
+.br-theme-bootstrap-stars .br-widget a.br-active:after {
+  color: #edb867;
+}
+.br-theme-bootstrap-stars .br-widget a.br-selected:after {
+  color: #edb867;
+}
+.br-theme-bootstrap-stars .br-widget .br-current-rating {
+  display: none;
+}
+.br-theme-bootstrap-stars .br-readonly a {
+  cursor: default;
+}
+@media print {
+  .br-theme-bootstrap-stars .br-widget a:after {
+    content: '\e007';
+    color: black;
+  }
+  .br-theme-bootstrap-stars .br-widget a.br-active:after,
+  .br-theme-bootstrap-stars .br-widget a.br-selected:after {
+    content: '\e006';
+    color: black;
+  }
+}
+;T:metadata{	:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"4processors:type=text/plain&file_type=text/plain;TTI"Afile-digest://app/assets/stylesheets/bootstrap-stars.css.txt;TTF:charsetI"
+utf-8;F:digest"%˜ÓŠº÷åí¬ÈaõanmFj'D#ä`ÎÕ«Ú°ÜÝ:lengthiµ:dependencies_digest"%[ro¨Å^içmKºÜû1&gð¡¶	¹FÒÏòœ:idI"Ede1441570a5e99f9fd399d8e0f6a30ab85da61452b139b506718240d6f3c769e;F:
+mtimel+
+LHY

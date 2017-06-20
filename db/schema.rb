@@ -16,177 +16,172 @@ ActiveRecord::Schema.define(version: 20160825213547) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "admins", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+  create_table "admins", id: :serial, force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.index ["email"], name: "index_admins_on_email", unique: true, using: :btree
-    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
-  end
-
-  create_table "bonus_sessions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "chatrooms", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid     "user_id"
-    t.uuid     "tutor_id"
-    t.uuid     "course_id"
-    t.text     "topic"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+  create_table "chatrooms", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "tutor_id"
+    t.integer "course_id"
+    t.text "topic"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.datetime "start"
-    t.boolean  "finished",   default: false
-    t.index ["course_id"], name: "index_chatrooms_on_course_id", using: :btree
-    t.index ["tutor_id"], name: "index_chatrooms_on_tutor_id", using: :btree
-    t.index ["user_id"], name: "index_chatrooms_on_user_id", using: :btree
+    t.boolean "finished", default: false
+    t.index ["course_id"], name: "index_chatrooms_on_course_id"
+    t.index ["tutor_id"], name: "index_chatrooms_on_tutor_id"
+    t.index ["user_id"], name: "index_chatrooms_on_user_id"
   end
 
-  create_table "courses", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "name"
+  create_table "courses", id: :serial, force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid     "subject_id"
-    t.index ["subject_id"], name: "index_courses_on_subject_id", using: :btree
+    t.integer "subject_id"
+    t.index ["subject_id"], name: "index_courses_on_subject_id"
   end
 
-  create_table "courses_tutors", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid "course_id"
-    t.uuid "tutor_id"
-    t.index ["course_id"], name: "index_courses_tutors_on_course_id", using: :btree
-    t.index ["tutor_id"], name: "index_courses_tutors_on_tutor_id", using: :btree
+  create_table "courses_tutors", id: :serial, force: :cascade do |t|
+    t.integer "course_id"
+    t.integer "tutor_id"
+    t.index ["course_id"], name: "index_courses_tutors_on_course_id"
+    t.index ["tutor_id"], name: "index_courses_tutors_on_tutor_id"
   end
 
-  create_table "courses_users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid "course_id"
-    t.uuid "user_id"
-    t.index ["course_id"], name: "index_courses_users_on_course_id", using: :btree
-    t.index ["user_id"], name: "index_courses_users_on_user_id", using: :btree
+  create_table "courses_users", id: :serial, force: :cascade do |t|
+    t.integer "course_id"
+    t.integer "user_id"
+    t.index ["course_id"], name: "index_courses_users_on_course_id"
+    t.index ["user_id"], name: "index_courses_users_on_user_id"
   end
 
-  create_table "messages", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid     "chatroom_id"
-    t.string   "messageable_type"
-    t.uuid     "messageable_id"
-    t.text     "content"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.string   "first_name"
-    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id", using: :btree
-    t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable_type_and_messageable_id", using: :btree
-  end
-
-  create_table "notifications", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid     "tutor_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.uuid     "chatroom_id"
-    t.index ["chatroom_id"], name: "index_notifications_on_chatroom_id", using: :btree
-    t.index ["tutor_id"], name: "index_notifications_on_tutor_id", using: :btree
-  end
-
-  create_table "sessions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+  create_table "messages", id: :serial, force: :cascade do |t|
+    t.integer "chatroom_id"
+    t.string "messageable_type"
+    t.integer "messageable_id"
+    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid     "user_id"
-    t.uuid     "tutor_id"
+    t.string "first_name"
+    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
+    t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable_type_and_messageable_id"
+  end
+
+  create_table "notifications", id: :serial, force: :cascade do |t|
+    t.integer "tutor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "chatroom_id"
+    t.index ["chatroom_id"], name: "index_notifications_on_chatroom_id"
+    t.index ["tutor_id"], name: "index_notifications_on_tutor_id"
+  end
+
+  create_table "sessions", id: :serial, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "tutor_id"
     t.datetime "start"
     t.datetime "finish"
-    t.text     "topic"
-    t.uuid     "course_id"
-    t.integer  "length"
-    t.string   "location"
-    t.boolean  "is_bonus"
-    t.index ["course_id"], name: "index_sessions_on_course_id", using: :btree
-    t.index ["tutor_id"], name: "index_sessions_on_tutor_id", using: :btree
-    t.index ["user_id"], name: "index_sessions_on_user_id", using: :btree
+    t.text "topic"
+    t.integer "course_id"
+    t.integer "length"
+    t.string "location"
+    t.boolean "is_bonus"
+    t.index ["course_id"], name: "index_sessions_on_course_id"
+    t.index ["tutor_id"], name: "index_sessions_on_tutor_id"
+    t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
-  create_table "subjects", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "name"
+  create_table "subjects", id: :serial, force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "timeslots", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid     "tutor_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+  create_table "timeslots", id: :serial, force: :cascade do |t|
+    t.integer "tutor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.datetime "slot_start"
     t.datetime "slot_finish"
-    t.index ["tutor_id"], name: "index_timeslots_on_tutor_id", using: :btree
+    t.index ["tutor_id"], name: "index_timeslots_on_tutor_id"
   end
 
-  create_table "tutors", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "email"
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+  create_table "tutors", id: :serial, force: :cascade do |t|
+    t.string "email"
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "stripe_id"
-    t.boolean  "setup"
-    t.integer  "session_count"
-    t.integer  "service"
-    t.integer  "rating"
-    t.boolean  "chat_ready"
-    t.index ["email"], name: "index_tutors_on_email", unique: true, using: :btree
-    t.index ["reset_password_token"], name: "index_tutors_on_reset_password_token", unique: true, using: :btree
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "stripe_id"
+    t.boolean "setup"
+    t.integer "session_count"
+    t.integer "service"
+    t.integer "rating"
+    t.boolean "chat_ready"
+    t.index ["email"], name: "index_tutors_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_tutors_on_reset_password_token", unique: true
   end
 
-  create_table "tutors_courses", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid "tutor_id"
-    t.uuid "course_id"
-    t.index ["course_id"], name: "index_tutors_courses_on_course_id", using: :btree
-    t.index ["tutor_id"], name: "index_tutors_courses_on_tutor_id", using: :btree
+  create_table "tutors_courses", id: :serial, force: :cascade do |t|
+    t.integer "tutor_id"
+    t.integer "course_id"
+    t.index ["course_id"], name: "index_tutors_courses_on_course_id"
+    t.index ["tutor_id"], name: "index_tutors_courses_on_tutor_id"
   end
 
-  create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string   "email"
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.string "email"
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "school"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "stripe_id"
-    t.boolean  "rate_lock"
-    t.uuid     "last_tutor_id"
-    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "school"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "stripe_id"
+    t.boolean "rate_lock"
+    t.uuid "last_tutor_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "users_courses", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid "user_id"
-    t.uuid "course_id"
-    t.index ["course_id"], name: "index_users_courses_on_course_id", using: :btree
-    t.index ["user_id"], name: "index_users_courses_on_user_id", using: :btree
+  create_table "users_courses", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "course_id"
+    t.index ["course_id"], name: "index_users_courses_on_course_id"
+    t.index ["user_id"], name: "index_users_courses_on_user_id"
   end
 
   add_foreign_key "chatrooms", "courses"
