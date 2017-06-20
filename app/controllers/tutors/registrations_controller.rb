@@ -1,7 +1,7 @@
 class Tutors::RegistrationsController < Devise::RegistrationsController
 # before_action :configure_sign_up_params, only: [:create]
 # before_action :configure_account_update_params, only: [:update]
-before_filter :authenticate_user!, :redirect_unless_admin
+before_action :authenticate_user!, :redirect_unless_admin
 
   # GET /resource/sign_up
   # def new
